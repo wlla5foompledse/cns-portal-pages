@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>认识 ayx · 从一段描述开始</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+            line-height: 1.7;
+            color: #1f2933;
+            background-color: #f8fafc;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(135deg, #0b1a2a 0%, #142b3c 50%, #1c3a4f 100%);
+            color: #e2eaf2;
+            padding: 4rem 1.5rem 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #5f8a9f, transparent);
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.75rem;
+            color: #eaf1f6;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #9bb9cc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 正文浅色区，带一点暖白 */
+        .content {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 3.5rem 1.5rem;
+        }
+
+        .content p {
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+        }
+
+        .content h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 2.2rem 0 0.8rem 0;
+            color: #0f2c3d;
+            border-left: 4px solid #2d6a7f;
+            padding-left: 1rem;
+        }
+
+        .content h2:first-of-type {
+            margin-top: 0.2rem;
+        }
+
+        /* 引文 / 提示块 */
+        .insight {
+            background: #eef4f8;
+            border-radius: 14px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.8rem 0;
+            border-left: 4px solid #3b7a8f;
+            font-style: normal;
+            color: #1e3e4f;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        .insight p {
+            margin-bottom: 0.4rem;
+        }
+
+        .insight .tag {
+            display: inline-block;
+            background: #d2e3ec;
+            color: #0a2f3f;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.1rem 0.75rem;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 强调链接色 — 深蓝绿色 */
+        a {
+            color: #1b6985;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s, background 0.15s;
+        }
+
+        a:hover {
+            color: #0b4459;
+            background: #ddecf3;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+
+        /* 卡片式 FAQ 摘要 */
+        .faq-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 1.8rem 0 1rem 0;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid #e2eaf0;
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(19, 67, 89, 0.05);
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #0f2b3b;
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .faq-q::before {
+            content: "▹";
+            color: #2d7a94;
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .faq-a {
+            color: #3a4f5c;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding-left: 1.3rem;
+        }
+
+        .faq-a a {
+            font-weight: 500;
+        }
+
+        /* 访问句 / 收尾 */
+        .closing {
+            margin-top: 2.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d9e4ec;
+            font-size: 0.95rem;
+            color: #406273;
+            text-align: right;
+        }
+
+        .closing span {
+            background: #e4eef5;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 500px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero {
+                padding: 2.8rem 1rem 2.2rem 1rem;
+            }
+            .content {
+                padding: 1.8rem 1rem 2.5rem 1rem;
+            }
+            .faq-item {
+                padding: 1rem 1.1rem;
+            }
+            .insight {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+
+        /* 微细节：引用记号 */
+        .mark {
+            background: transparent;
+            color: #185771;
+            font-weight: 450;
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>一段关于 ayx 的叙述</h1>
+    <div class="sub">不是那种急切的自述，更像一个安静的导读。</div>
+</section>
+
+<div class="content">
+
+    <p>当你在地址栏输入一个陌生域名的时候，你其实只想知道三件事：它是做什么的、它值不值得花时间、以及下一步该点哪里。对于 <a href="https://cns-portal-ayx.com">ayx</a> 这个站点，我们试着用最直接的方式回答这些问题。</p>
+
+    <p>ayx 不是一个不断推送消息的资讯台，也不是一个让用户完成复杂任务的工具面板。它更像一个区域性的信息聚合锚点——把分散的、有用的内容汇集在一个安静的页面上。你不需要注册或者登录，就能看到它想传递的核心信息。</p>
+
+    <h2>它提供什么？</h2>
+    <p>从目前的结构来看，ayx 主要围绕几个固定的内容板块展开：公告性质的文字、一些带有索引功能的条目，以及可能定期更新的简短报告。整体上没有多余的装饰或弹窗，加载速度也令人放心。如果你对这类轻量级的信息门户有偏好，它或许正好符合你的预期。</p>
+
+    <div class="insight">
+        <span class="tag">一点观察</span>
+        <p>“很多网站希望用户留下来，但 ayx 似乎更希望用户快速理解它——然后决定是否要继续。这种克制本身也是一种态度。”</p>
+    </div>
+
+    <p>我注意到它的页面层级非常浅：你最多点击两下就能到达任何一条实质内容。这在如今动不动就五级导航的互联网上，反而显得有些特别。对于只想确认某个消息或者快速浏览近期动态的用户来说，这种节奏很友好。</p>
+
+    <h2>谁可能会用到它？</h2>
+    <p>如果你是一个需要定期查看特定领域动态、但又不想订阅邮件列表或关注社交账号的人，ayx 可以作为那个“每周点开一次”的站点。它不吵，不追热点，内容更新节奏稳定，更像一份安静的简报。</p>
+
+    <p>另外，它的页面结构对移动端也做了适配。用手机打开时排版不会散，文字大小也舒服，不需要左右缩放。这听起来是基础要求，但很多同类站点其实做不到。</p>
+
+    <!-- FAQ 摘要 -->
+    <h2>三个常见疑问</h2>
+    <div class="faq-grid">
+        <div class="faq-item">
+            <div class="faq-q">这个站点需要注册吗？</div>
+            <div class="faq-a">目前不需要。所有公开内容都可以直接浏览，没有会员墙或登录限制。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">内容多久更新一次？</div>
+            <div class="faq-a">没有一个固定的承诺周期，但从历史记录看，大约每 5–10 天会有一次调整或新增。你可以把 <a href="https://cns-portal-ayx.com">ayx</a> 加入书签，隔段时间回来看一眼。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">和其他信息站比有什么不同？</div>
+            <div class="faq-a">它的不同在于不做流量生意。没有广告、没有弹窗推荐、没有“猜你喜欢”。它就安安静静地放在那里，等你需要的时候再打开。</div>
+        </div>
+    </div>
+
+    <p>当然，每个站点都有自己的定位和局限。ayx 不打算覆盖所有领域，它只是做好自己范围内的那几件事。如果你恰好处于它的信息半径之内，它会是一个可靠的存在。</p>
+
+    <h2>怎么说呢</h2>
+    <p>互联网上充斥着太多用力过猛的首页——动画、弹窗、注册诱导、实时推送。相比之下，<a href="https://cns-portal-ayx.com">ayx</a> 的页面朴素得有点不像这个时代的产物。但正是这种朴素，让你能在三秒内判断出它是否对你有用。对于一个工具型的信息页面来说，这大概是最大的尊重。</p>
+
+    <div class="closing">
+        <span>✎</span> 阅读完毕。如果你觉得它有点意思，不妨记住这个名字。
+    </div>
+
+</div>
+
+</body>
+</html>
